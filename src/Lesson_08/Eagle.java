@@ -3,6 +3,8 @@ package Lesson_08;
 import java.security.SecureRandom;
 
 public class Eagle extends Animal {
+    private final double speed = new SecureRandom().nextInt(80);
+
     @Override
     protected String name() {
         return "Thunder";
@@ -15,7 +17,7 @@ public class Eagle extends Animal {
 
     @Override
     protected double speed() {
-        return new SecureRandom().nextInt(80);
+        return speed;
     }
 
     @Override
