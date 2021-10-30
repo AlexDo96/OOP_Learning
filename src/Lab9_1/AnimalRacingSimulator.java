@@ -32,10 +32,16 @@ public class AnimalRacingSimulator {
             Animal winner = controller.animalsRacing(animalList);
 
             // Add into racingRecords
-            racingRecords.put(winner.simpleName(), 1); //Consider this line
-            int currentWinRound = racingRecords.get(winner.simpleName());
-            racingRecords.replace(winner.simpleName(), currentWinRound++);
-            System.out.println("Current win: " + currentWinRound);
+            /*
+            Need to call getClass().getSimpleName() of winner animal to count correctly
+            instead of simpleName() is generated new random value when you call it.
+            */
+            String winnerClassSimpleName = winner.getClass().getSimpleName();
+            if (racingRecords.containsKey(winnerClassSimpleName)) {
+                racingRecords.replace(winnerClassSimpleName, racingRecords.get(winnerClassSimpleName) + 1);
+            } else {
+                racingRecords.put(winnerClassSimpleName, 1);
+            }
         }
 
         Map.Entry<String, Integer> finalWinnerFamily = null;
@@ -52,6 +58,11 @@ public class AnimalRacingSimulator {
             }
         }
 
+        System.out.println("Winner animals: ");
+        for (String key : racingRecords.keySet()) {
+            System.out.println(key + ": win " + racingRecords.get(key) + " times");
+        }
+        System.out.println("------------------");
         System.out.println("Final winner is: " + finalWinnerFamily.getKey());
         System.out.println("Win " + finalWinnerFamily.getValue() + " times");
     }
