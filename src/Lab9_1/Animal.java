@@ -7,16 +7,6 @@ public abstract class Animal {
 
     protected abstract String simpleName();
 
-    protected int winCount = 0;
-
-    public int getWinCount() {
-        return winCount;
-    }
-
-    public void setWinCount(int winCount) {
-        this.winCount = winCount;
-    }
-
     protected boolean isRaceApplicable() {
         return raceBehavior.raceAble();
     }
